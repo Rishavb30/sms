@@ -1,0 +1,320 @@
+import sqlite3  
+  
+con = sqlite3.connect("bank.db")  
+print("Database opened successfully")  
+  
+
+print("Table created successfully")  
+  
+con.close()
+
+var='''
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>SMS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   
+</head>  
+<body>
+    <div class="jumbotron text-center">
+      <h2>Hi, Welcome to Student management Portal</h2>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+            <div cass="navbar-link"> 
+              <a class="btn btn-dark" href="/add" role="button">Student registration</a><br><br>
+            </div>
+        </div>
+        <div class="col-sm-4">
+          <div cass="navbar-link">
+            <a class="btn btn-dark" href="/view" role="button">Show student information</a>
+          </div>
+        </div> 
+        <div class="col-sm-4">
+          <div cass="navbar-link">
+            <a class="btn btn-dark" href="/delete" role="button">Delete student information</a>
+          </div>
+        </div>
+        </div>
+</body>  
+</html>
+'''
+file=open("templates/index.html","w")
+file.write(var)
+file.close()
+var='''
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Bank Account</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>  
+    <script src ="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
+</head>  
+<body>
+    <div class="jumbotron text-center">
+      <h2>Register student By Filling Following Details </h2>
+    </div>   
+    <form action = "/savedetails" method="post">
+      <div class="table-responsive">
+          <div class="form-group"> 
+           <label for="inputName" class="col-sm-2 col-form-label">Name:</label>
+            <input id="inputName" type="text" name="name" class="form-control">
+          </div>
+          <div class="form-group">
+           <label for="inputDivision" class="col-sm-2 col-form-label">Division</label>
+            <textarea id="inputDivision" class="form-control" rows="5" name="division"></textarea>
+          </div>
+          <div class="form-group">
+          <label for="inputMob" class="col-sm-2 col-form-label">Mobile Number:</label>
+             <input id = "inputMob" type="text" name="mobno" class="form-control">
+          </div>
+          
+          <div class="form-group">
+            <label for="govidtype" class="col-sm-2 col-form-label">Govt. ID Type:</label>
+                <select class="form-control" id="govidtype" name="govt_id_name">
+                  <option>PAN Card</option>
+                  <option>Voter card</option>
+                  <option>Aadhaar</option>
+                  <option>Driving Licence</option>
+                </select>
+          </div>
+
+           <div class="form-group">
+           <label for="govidno" class="col-sm-2 col-form-label">Govt. ID No. :</label>
+            <input id ="govidno" type="text" name="govt_id_no" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="acctype" class="col-sm-2 col-form-label">Study Type:</label>
+                <select class="form-control" id="stutype" name="stu_type">
+                  <option>Campus</option>
+                  <option>Away</option>
+                </select>
+          </div>
+          <div class="form-group">
+            <label for="atmyn" class="col-sm-2 col-form-label">Want institute transport</label> 
+                <select class="form-control" id="atmyn" name="atm_y_n">
+                  <option>YES</option>
+                  <option>NO</option>
+                </select>
+          </div>
+            <br><button type="submit" class="btn btn-dark">Register student</button>
+      </div>  
+    </form>  
+</body>  
+</html>
+'''
+file=open("templates/add.html","w")
+file.write(var)
+file.close()
+
+var ='''
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Bank Account</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   
+    
+</head>  
+<body>
+    <div class="jumbotron text-center">
+      <h3>Hi Admin, {{msg}}</h3>
+      <div cass="navbar-link">
+       <a class="btn btn-dark" href="/view" role="button">Show student information</a>
+      </div>
+    </div>
+</body>  
+</html>
+'''
+file=open("templates/success.html","w")
+file.write(var)
+file.close()
+
+var ='''
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Bank Account</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   
+    
+</head>  
+<body>
+     <div class="jumbotron text-center">
+      <h2>Delete Your Information </h2>
+    </div>   
+    <form action = "/del_acc" method="post">
+      <div class="table-responsive">
+          <div class="form-group"> 
+           <label for="inputName" class="col-sm-2 col-form-label">Name:</label>
+            <input id="inputName" type="text" name="name" class="form-control">
+          </div>
+         
+          <div class="form-group">
+            <label for="acctype" class="col-sm-2 col-form-label">Study Type:</label>
+                <select class="form-control" id="acctype" name="acc_type">
+                  <option>Campus</option>
+                  <option>Away</option>
+                </select>
+          </div>
+          <br><button type="submit" class="btn btn-dark">Delete Student Information</button>
+      </div>  
+    </form> 
+</body>  
+</html>
+'''
+file=open("templates/delete.html","w")
+file.write(var)
+file.close()
+
+var='''
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>SMS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>  
+   
+</head>  
+<body>  
+  <div class="jumbotron text-center">
+    <h3>View Accounts</h3>
+  </div>
+  <table border=5 class="table table-hover">  
+    <thead>  
+        <td>ID</td>  
+        <td>Name</td>
+        <td>Address</td> 
+        <td>Mobile No.</td> 
+        <td>Govt. ID Type</td>
+        <td>Govt. ID Number</td>
+        <td>Study Type</td>
+        <td>Transport Taken</td>
+    </thead>  
+      
+    {% for row in rows %}  
+        <tr>  
+            <td>{{row["id"]}}</td>  
+            <td>{{row["name"]}}</td> 
+            <td>{{row["address"]}}</td>
+            <td>{{row["mobno"]}}</td> 
+            <td>{{row["govt_id_name"]}}</td>
+            <td>{{row["govt_id_no"]}}</td>
+            <td>{{row["acc_type"]}}</td>
+            <td>{{row["atm_y_n"]}}</td>
+        </tr>  
+      
+    {% endfor %}  
+  </table><br><br>  
+  <div cass="navbar-link">
+    <a class="btn btn-dark" href="/" role="button">Go Back to Home Page</a>
+  </div>
+</body>  
+</html>
+'''
+file=open("templates/view.html","w")
+file.write(var)
+file.close()
+
+!pip install flask_ngrok
+
+from flask import Flask,render_template,url_for,redirect,request
+import sqlite3 
+from flask_ngrok import run_with_ngrok
+  
+app = Flask(__name__)
+run_with_ngrok(app)
+
+ 
+@app.route("/")  
+def index():  
+    return render_template("index.html");  
+ 
+@app.route("/add")  
+def add():  
+    return render_template("add.html") 
+
+@app.route("/delete")  
+def delete():  
+    return render_template("delete.html")   
+ 
+@app.route("/savedetails",methods = ["POST","GET"])  
+def saveDetails():  
+    msg = "msg"  
+    if request.method == "POST":  
+        try:  
+            name = request.form["name"]
+            address = request.form["address"]
+            mobno = request.form["mobno"]
+            govt_id_name = request.form["govt_id_name"]
+            govt_id_no = request.form["govt_id_no"]
+            acc_type = request.form["acc_type"]
+            atm_y_n = request.form["atm_y_n"]  
+            with sqlite3.connect("bank.db") as con:  
+                cur = con.cursor()  
+                cur.execute("INSERT into acc (name, address, mobno, govt_id_name, govt_id_no, acc_type, atm_y_n) values (?,?,?,?,?,?,?)",(name, address, mobno, govt_id_name, govt_id_no, acc_type, atm_y_n))
+                con.commit() 
+                msg = "{}'s Student registered successfully".format(name)  
+        except:  
+            con.rollback()  
+            msg = "student is not registered"  
+        finally:  
+            return render_template("success.html",msg = msg)  
+            con.close()  
+ 
+@app.route("/view")  
+def view():  
+    con = sqlite3.connect("s.db")  
+    con.row_factory = sqlite3.Row  
+    cur = con.cursor()  
+    cur.execute("select * from acc")  
+    rows = cur.fetchall()  
+    return render_template("view.html",rows = rows)  
+
+@app.route("/del_acc",methods = ["POST","GET"])  
+def del_acc():  
+    msg = "msg"  
+    if request.method == "POST":  
+        try:  
+            name = request.form["name"]
+            acc_type = request.form["acc_type"]  
+            with sqlite3.connect("s.db") as con:  
+                cur = con.cursor()  
+                cur.execute("DELETE FROM acc WHERE name=? and  acc_type = ?;",(name, acc_type))
+                con.commit() 
+                msg = "{}'s Student registered successfully".format(name)  
+        except:  
+            con.rollback()  
+            msg = "student cannot be registered"  
+        finally:  
+            return render_template("success.html",msg = msg)  
+            con.close()  
+  
+if __name__ == "__main__": 
+  app.run()
